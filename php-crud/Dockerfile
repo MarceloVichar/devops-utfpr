@@ -11,4 +11,5 @@ COPY ./www/ /var/www/html/
 COPY ./crud.sql /
 COPY ./start.sh /
 VOLUME /var/lib/mysql
+EXPOSE 80
 ENTRYPOINT sh /start.sh
