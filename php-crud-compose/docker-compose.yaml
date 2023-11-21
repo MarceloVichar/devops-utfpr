@@ -1,0 +1,25 @@
+version: "3.0"
+
+services:
+  db:
+    image: mariadb:lts-jammy
+    environment:
+      - MARIADB_ROOT_PASSWORD=abc123
+    volumes:
+      - ./crud.sql:/docker-entrypoint-initdb.d/crud.sql
+      - db_persist:/var/lib/mysql/
+    ports:
+      - "3306:3306"
+
+  web:
+    build: .
+    volumes:
+      - ./www/:/var/www/html/
+      - ./start.sh:/start.sh
+    ports:
+      - "80:80"
+    entrypoint: /start.sh
+
+volumes:
+  db_persist:
+    driver: local
