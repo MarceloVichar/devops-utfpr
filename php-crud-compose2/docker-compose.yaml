@@ -1,0 +1,18 @@
+version: "3.0"
+
+services:
+  db:
+    build: ./db
+    volumes:
+      - db_persist:/var/lib/mysql/
+    ports:
+      - "3306:3306"
+
+  web:
+    build: ./web
+    ports:
+      - "80:80"
+
+volumes:
+  db_persist:
+    driver: local
